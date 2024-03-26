@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=2gb
+#SBATCH --time=12:00:00
+#SBATCH --job-name=MOLPRO
+
+module purge
+module load phenix/1.11.1-2580
+module load molprobity4/4.02-528
+
+oneline-analysis noH_man5_rev1 > man5_rev1_noH.log

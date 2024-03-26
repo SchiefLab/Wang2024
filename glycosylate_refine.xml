@@ -1,0 +1,13 @@
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <MOVERS>
+        <SimpleGlycosylateMover name="glycosylate" positions="%%sites%%" glycosylation="man5" idealize_glycosylation="0" strip_existing="1" />
+        <GlycanTreeModeler name="refine" layer_size="2" window_size="1" rounds="3" refine="false" />
+    </MOVERS>
+    <PROTOCOLS>
+        <Add mover="glycosylate" />
+        <Add mover="refine" />
+    </PROTOCOLS>
+</ROSETTASCRIPTS>
+

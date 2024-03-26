@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=2gb
+#SBATCH --time=72:00:00
+
+module purge
+module load rosetta/2022.11
+
+rosetta_scripts.linuxgccrelease \
+ -in::no_fconfig \
+ -in::path ./ \
+ -in::file::s g28v2_rev0_nogly.pdb \
+ -parser:protocol glycosylate_refine.xml \
+ -parser:script_vars sites=61,86,93,130,134,141,162,189,195,200,206,213,218,230,260,266,271,276,280,283,287,293,297,308,313,316,322,337 \
+ -out::suffix _ALL_man5_refine \
+ -nstruct 1 \
+ -include_sugars \
+ -alternate_3_letter_codes pdb_sugar \
+ -write_pdb_link_records \
+ -write_glycan_pdb_codes

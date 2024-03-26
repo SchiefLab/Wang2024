@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --partition=shared
+#SBATCH --nodes=5
+#SBATCH --ntasks-per-node=16
+#SBATCH --mem=128gb
+#SBATCH --time=48:00:00
+#SBATCH --job-name=RELAX
+
+module purge
+module load rosetta/2022.11
+
+mpirun `which rosetta_scripts.mpi.linuxgccrelease` \
+ -in::no_fconfig \
+ -in::path ./ \
+ -in::file::s g28v2_rev0_nogly_ALL_man5_refine_0001.pdb \
+ -in::detect_disulf true \
+ -parser::protocol relax.xml \
+ -out::suffix _rev1_noCON \
+ -default_max_cycles 500 \
+ -relax::constrain_relax_to_start_coords false \
+ -relax::ramp_constraints false \
+ -nstruct 319 \
+ -beta_cart \
+ -include_sugars true \
+ -ideal_sugars \
+ -write_pdb_link_records \
+ -auto_detect_glycan_connections true \
+ -min_bond_length 1.1 \
+ -max_bond_length 1.7 \
+ -alternate_3_letter_codes pdb_sugar \
+ -write_glycan_pdb_codes

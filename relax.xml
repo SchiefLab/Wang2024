@@ -1,0 +1,12 @@
+<ROSETTASCRIPTS>
+   <SCOREFXNS>
+     <ScoreFunction name="relax" weights="beta_cart" symmetric="0" />
+   </SCOREFXNS>
+   <MOVERS>
+     <FastRelax name="relaxcart" scorefxn="relax" repeats="4" cartesian="1" />
+   </MOVERS>
+   <PROTOCOLS>
+      <Add mover="relaxcart" />
+   </PROTOCOLS>
+   <OUTPUT scorefxn="relax" /> 
+</ROSETTASCRIPTS>
